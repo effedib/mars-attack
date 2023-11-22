@@ -38,16 +38,16 @@ namespace RoverCommandService
                 switch (command)
                 {
                     case 'f':
-                        checkObastacle = MoveForward();
+                        checkObastacle = MoveRover();
                         break;
                     case 'b':
-                        checkObastacle = MoveBackward();
+                        checkObastacle = MoveRover(-1);
                         break;
                     case 'r':
-                        TurnRight();
+                        TurnRover(location.Direction);
                         break;
                     case 'l':
-                        TurnLeft();
+                        TurnRover(location.Direction, -1);
                         break;
                     default:
                         break;
@@ -56,17 +56,8 @@ namespace RoverCommandService
             }
         }
 
-        private bool MoveForward()
-        {
-            return Movement();
-        }
-
-        private bool MoveBackward()
-        {
-            return Movement(-1);
-        }
      
-        private bool Movement(int directionMovement = 1)
+        private bool MoveRover(int directionMovement = 1)
         {
             Point nextLocation = new(location.X, location.Y, location.Direction);
             switch (location.Direction)
@@ -102,25 +93,16 @@ namespace RoverCommandService
 
         }
 
-        private void TurnRight()
+        private void TurnRover(Directions current, int directionTournement = 1)
         {
-            location.Direction = GetNextDirection(location.Direction);
-            Console.WriteLine($"new direction = {location.Direction}");
-        }
+            int newIndexDirection = (int)current + directionTournement;
 
-        private void TurnLeft()
-        {
-            location.Direction = GetPreviousDirection(location.Direction);
-            Console.WriteLine($"new direction = {location.Direction}");
-        }
+            int addDirectionsCount = (directionTournement == 1) ? directionsCount : 0;
 
-        private Directions GetNextDirection(Directions current)
-        {
-            return (Directions)(((int)current + 1) % directionsCount);
-        }
-        private Directions GetPreviousDirection(Directions current)
-        {
-            return (Directions)(((int)current - 1 + directionsCount) % directionsCount);
+            location.Direction = (Directions)((newIndexDirection + addDirectionsCount) % directionsCount);
+
+            Console.WriteLine($"new direction = {location.Direction}");
+
         }
     }
 }
