@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoverCommandService", "RoverCommandService.csproj", "{01F40C22-7046-4403-9207-AA0AB57DA6B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01F40C22-7046-4403-9207-AA0AB57DA6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01F40C22-7046-4403-9207-AA0AB57DA6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01F40C22-7046-4403-9207-AA0AB57DA6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01F40C22-7046-4403-9207-AA0AB57DA6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26D9634A-D90E-42BC-8829-EA32372520FA}
+	EndGlobalSection
+EndGlobal
