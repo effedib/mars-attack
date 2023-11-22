@@ -1,20 +1,31 @@
 namespace RoverCommandService
 {
-    public class PlanetMap
+    public class PlanetMap(int width, int height)
     {
-        private bool[,] obstacleGrid; // Griglia per gestire gli ostacoli
+        public int Width => width;
+        public int Height => height;
 
-        public PlanetMap(int width, int height)
+        private readonly Random random = new();
+        public (int, int)[] GenerateGrid()
         {
-            obstacleGrid = new bool[width, height];
-            // Inizializza la griglia degli ostacoli, impostando true dove ci sono ostacoli
+            var grid = new (int, int)[width * height];
+            int index = 0;
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    grid[index++] = (x, y);
+                }
+            }
+
+            return grid;
         }
 
-        public bool CheckObstacle(int x, int y)
+        public bool CheckObstacle(int x, int y, (int, int)[] grd)
         {
-            // Controlla se c'è un ostacolo alla posizione (x, y)
-            // Restituisce true se c'è un ostacolo, false altrimenti
-            return true;
+            Console.WriteLine($"Check obstacle for {x},{y}");
+            return random.Next(0, 2) == 0;
         }
     }
 }
