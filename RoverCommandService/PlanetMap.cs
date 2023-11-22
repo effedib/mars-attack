@@ -22,7 +22,7 @@ namespace RoverCommandService
             return grid;
         }
 
-        public bool CheckObstacle(int x, int y, (int, int)[] grd)
+        public bool CheckObstacle(int x, int y)
         {
             Console.WriteLine($"Check obstacle for {x},{y}");
             return random.Next(0, 2) == 0;

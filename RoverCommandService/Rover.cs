@@ -32,15 +32,16 @@ namespace RoverCommandService
         private (int, int)[] mapGrid = planetMap.GenerateGrid();
         public void ReceiveCommands(char[] commands)
         {
+            bool checkObastacle = false;
             foreach (char command in commands)
             {
                 switch (command)
                 {
                     case 'f':
-                        MoveForward();
+                        checkObastacle = MoveForward();
                         break;
                     case 'b':
-                        MoveBackward();
+                        checkObastacle = MoveBackward();
                         break;
                     case 'r':
                         TurnRight();
@@ -51,38 +52,54 @@ namespace RoverCommandService
                     default:
                         break;
                 }
+                if (checkObastacle) break;
             }
         }
 
-        private void MoveForward()
+        private bool MoveForward()
         {
-            Movement();
+            return Movement();
         }
 
-        private void MoveBackward()
+        private bool MoveBackward()
         {
-            Movement(-1);
+            return Movement(-1);
         }
-        private void Movement(int directionMovement = 1)
+     
+        private bool Movement(int directionMovement = 1)
         {
+            Point nextLocation = new(location.X, location.Y, location.Direction);
             switch (location.Direction)
             {
                 case Directions.N:
-                    location.Y = (location.Y + 1) * directionMovement;
+                    nextLocation.Y = (location.Y + 1) * directionMovement;
                     break;
                 case Directions.E:
-                    location.X = (location.X + 1) * directionMovement;
+                    nextLocation.X = (location.X + 1) * directionMovement;
                     break;
                 case Directions.S:
-                    location.Y = (location.Y - 1) * directionMovement;
+                    nextLocation.Y = (location.Y - 1) * directionMovement;
                     break;
                 case Directions.W:
-                    location.X = (location.X - 1) * directionMovement;
+                    nextLocation.X = (location.X - 1) * directionMovement;
                     break;
                 default:
                     break;
             }
-            Console.WriteLine($"new Point = {location.X},{location.Y}");
+
+            if (planetMap.CheckObstacle(nextLocation.X, nextLocation.Y))
+            {
+                location = nextLocation;
+                Console.WriteLine("Road clean, no obstacle detected");
+                Console.WriteLine($"new Point = {location.X},{location.Y}");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Obstacle detected, STOP!");
+                return true;
+            }
+
         }
 
         private void TurnRight()
