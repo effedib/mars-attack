@@ -29,9 +29,11 @@ namespace RoverCommandService
 
         private static PlanetMap planetMap = new(10, 10);
 
-        private (int, int)[] mapGrid = planetMap.GenerateGrid();
         public void ReceiveCommands(char[] commands)
         {
+            string commandsString = new string(commands.ToArray());
+            Console.WriteLine($"Commands received: {commandsString}");
+
             bool checkObastacle = false;
             foreach (char command in commands)
             {
@@ -44,10 +46,10 @@ namespace RoverCommandService
                         checkObastacle = MoveRover(-1);
                         break;
                     case 'r':
-                        TurnRover(location.Direction);
+                        TurnRover();
                         break;
                     case 'l':
-                        TurnRover(location.Direction, -1);
+                        TurnRover(-1);
                         break;
                     default:
                         break;
@@ -63,22 +65,22 @@ namespace RoverCommandService
             switch (location.Direction)
             {
                 case Directions.N:
-                    nextLocation.Y = (location.Y + 1) * directionMovement;
+                    nextLocation.Y = (location.Y + directionMovement + planetMap.Height) % planetMap.Height;
                     break;
                 case Directions.E:
-                    nextLocation.X = (location.X + 1) * directionMovement;
+                    nextLocation.X = (location.X + directionMovement + planetMap.Width) % planetMap.Width;
                     break;
                 case Directions.S:
-                    nextLocation.Y = (location.Y - 1) * directionMovement;
+                    nextLocation.Y = (location.Y - directionMovement + planetMap.Height) % planetMap.Height;
                     break;
                 case Directions.W:
-                    nextLocation.X = (location.X - 1) * directionMovement;
+                    nextLocation.X = (location.X - directionMovement + planetMap.Width) % planetMap.Width;
                     break;
                 default:
                     break;
             }
 
-            if (planetMap.CheckObstacle(nextLocation.X, nextLocation.Y))
+            if (!planetMap.CheckObstacle(nextLocation.X, nextLocation.Y))
             {
                 location = nextLocation;
                 Console.WriteLine("Road clean, no obstacle detected");
@@ -93,16 +95,36 @@ namespace RoverCommandService
 
         }
 
-        private void TurnRover(Directions current, int directionTournement = 1)
+        private void TurnRover(int directionTournement = 1)
         {
             int addDirectionsCount = (directionTournement < 0) ? directionsCount : 0;
 
-            int newIndexDirection = (int)current + directionTournement + addDirectionsCount;
+            int newIndexDirection = (int)location.Direction + directionTournement + addDirectionsCount;
 
             location.Direction = (Directions)(newIndexDirection % directionsCount);
 
             Console.WriteLine($"new direction = {location.Direction}");
+        }
 
+        public void ShowMap()
+        {
+            Console.WriteLine("Generating Map...\n");
+            (int, int)[] grd = planetMap.MapGrid;
+
+            int previousX = 0;
+            foreach (var point in grd)
+            {
+                if (point.Item1 == previousX)
+                {
+                    Console.Write($"{point} ");
+                }
+                else
+                {
+                    previousX = point.Item1;
+                    Console.Write($"\n{point} ");
+                }
+            }
+            Console.WriteLine("\n");
         }
     }
 }

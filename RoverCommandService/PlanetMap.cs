@@ -6,7 +6,10 @@ namespace RoverCommandService
         public int Height => height;
 
         private readonly Random random = new();
-        public (int, int)[] GenerateGrid()
+
+        public (int, int)[] MapGrid => GenerateGrid();
+
+        private (int, int)[] GenerateGrid()
         {
             var grid = new (int, int)[width * height];
             int index = 0;
@@ -25,7 +28,7 @@ namespace RoverCommandService
         public bool CheckObstacle(int x, int y)
         {
             Console.WriteLine($"Check obstacle for {x},{y}");
-            return random.Next(0, 2) == 0;
+            return random.Next(0, 4) == 0;
         }
     }
 }
