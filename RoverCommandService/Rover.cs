@@ -95,11 +95,11 @@ namespace RoverCommandService
 
         private void TurnRover(Directions current, int directionTournement = 1)
         {
-            int newIndexDirection = (int)current + directionTournement;
+            int addDirectionsCount = (directionTournement < 0) ? directionsCount : 0;
 
-            int addDirectionsCount = (directionTournement == 1) ? directionsCount : 0;
+            int newIndexDirection = (int)current + directionTournement + addDirectionsCount;
 
-            location.Direction = (Directions)((newIndexDirection + addDirectionsCount) % directionsCount);
+            location.Direction = (Directions)(newIndexDirection % directionsCount);
 
             Console.WriteLine($"new direction = {location.Direction}");
 
