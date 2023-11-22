@@ -30,12 +30,12 @@ namespace RoverCommandService
 
             var commands = new[]
             {
-                'f','b','l','r'
+                'f','f','f','l','b','l','f','f','r','f'
             };
 
             app.MapGet("/commandrover", (HttpContext httpContext) =>
             {
-                Rover rover = new(0, 0, 'N');
+                Rover rover = new(0, 0, Directions.N);
                 rover.ReceiveCommands(commands);
             })
             .WithName("SendCommandsRover")

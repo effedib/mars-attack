@@ -5,21 +5,31 @@ namespace RoverCommandService
         void ReceiveCommands(char[] commands);
     }
 
-    public class Rover : IRoverCommandReceiver
+    public enum Directions
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public char Direction { get; private set; }
+        N,
+        E,
+        S,
+        W
+    }
 
-        private char[] Directions { get;  }
+    public class Point(int x, int y, Directions direction)
+    {
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
+        public Directions Direction { get; set; } = direction;
 
-        public Rover(int x, int y, char direction)
-        {
-            X = x;
-            Y = y;
-            Direction = direction;
-        }
+    }
+    public class Rover(int x, int y, Directions direction) : IRoverCommandReceiver
+    {
 
+        private Point location = new(x, y, direction);
+
+        private readonly int directionsCount = Enum.GetValues(typeof(Directions)).Length;
+
+        private static PlanetMap planetMap = new(10, 10);
+
+        private (int, int)[] mapGrid = planetMap.GenerateGrid();
         public void ReceiveCommands(char[] commands)
         {
             foreach (char command in commands)
@@ -44,29 +54,56 @@ namespace RoverCommandService
             }
         }
 
-        // check direction before move (if right/left, update direction, then move)
         private void MoveForward()
         {
-            X += 1;
-            Console.WriteLine("Move Forward!");
-            Console.WriteLine($"new X = {X}");
+            Movement();
         }
 
         private void MoveBackward()
         {
-            X -= 1;
-            Console.WriteLine("Move Backward!");
-            Console.WriteLine($"new X = {X}");
+            Movement(-1);
+        }
+        private void Movement(int directionMovement = 1)
+        {
+            switch (location.Direction)
+            {
+                case Directions.N:
+                    location.Y = (location.Y + 1) * directionMovement;
+                    break;
+                case Directions.E:
+                    location.X = (location.X + 1) * directionMovement;
+                    break;
+                case Directions.S:
+                    location.Y = (location.Y - 1) * directionMovement;
+                    break;
+                case Directions.W:
+                    location.X = (location.X - 1) * directionMovement;
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine($"new Point = {location.X},{location.Y}");
         }
 
         private void TurnRight()
         {
-            Console.WriteLine("Turn Right!");
+            location.Direction = GetNextDirection(location.Direction);
+            Console.WriteLine($"new direction = {location.Direction}");
         }
 
         private void TurnLeft()
         {
-            Console.WriteLine("Turn Left!");
+            location.Direction = GetPreviousDirection(location.Direction);
+            Console.WriteLine($"new direction = {location.Direction}");
+        }
+
+        private Directions GetNextDirection(Directions current)
+        {
+            return (Directions)(((int)current + 1) % directionsCount);
+        }
+        private Directions GetPreviousDirection(Directions current)
+        {
+            return (Directions)(((int)current - 1 + directionsCount) % directionsCount);
         }
     }
 }
