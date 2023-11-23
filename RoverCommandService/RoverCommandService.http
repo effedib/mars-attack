@@ -1,6 +1,6 @@
 @RoverCommandService_HostAddress = http://localhost:5197
 
-GET {{RoverCommandService_HostAddress}}/weatherforecast/
+GET {{RoverCommandService_HostAddress}}/commandrover/
 Accept: application/json
 
 ###

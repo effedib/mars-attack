@@ -1,9 +1,5 @@
 namespace RoverCommandService
 {
-    public interface IRoverCommandReceiver
-    {
-        void ReceiveCommands(char[] commands);
-    }
 
     public enum Directions
     {
@@ -12,27 +8,19 @@ namespace RoverCommandService
         S,
         W
     }
-
-    public class Point(int x, int y, Directions direction)
-    {
-        public int X { get; set; } = x;
-        public int Y { get; set; } = y;
-        public Directions Direction { get; set; } = direction;
-
-    }
-    public class Rover(int x, int y, Directions direction) : IRoverCommandReceiver
+    public class Rover(int x, int y, Directions direction, PlanetMap planetMap) : IRoverCommandReceiver
     {
 
         private Point location = new(x, y, direction);
 
         private readonly int directionsCount = Enum.GetValues(typeof(Directions)).Length;
 
-        private static PlanetMap planetMap = new(10, 10);
+        private PlanetMap PlanetMapObj => planetMap;
 
         public void ReceiveCommands(char[] commands)
         {
             string commandsString = new string(commands.ToArray());
-            Console.WriteLine($"Commands received: {commandsString}");
+            Console.WriteLine($"Commands received: {commandsString}\n");
 
             bool checkObastacle = false;
             foreach (char command in commands)
@@ -65,22 +53,22 @@ namespace RoverCommandService
             switch (location.Direction)
             {
                 case Directions.N:
-                    nextLocation.Y = (location.Y + directionMovement + planetMap.Height) % planetMap.Height;
+                    nextLocation.Y = (location.Y + directionMovement + PlanetMapObj.Height) % PlanetMapObj.Height;
                     break;
                 case Directions.E:
-                    nextLocation.X = (location.X + directionMovement + planetMap.Width) % planetMap.Width;
+                    nextLocation.X = (location.X + directionMovement + PlanetMapObj.Width) % PlanetMapObj.Width;
                     break;
                 case Directions.S:
-                    nextLocation.Y = (location.Y - directionMovement + planetMap.Height) % planetMap.Height;
+                    nextLocation.Y = (location.Y - directionMovement + PlanetMapObj.Height) % PlanetMapObj.Height;
                     break;
                 case Directions.W:
-                    nextLocation.X = (location.X - directionMovement + planetMap.Width) % planetMap.Width;
+                    nextLocation.X = (location.X - directionMovement + PlanetMapObj.Width) % PlanetMapObj.Width;
                     break;
                 default:
                     break;
             }
 
-            if (!planetMap.CheckObstacle(nextLocation.X, nextLocation.Y))
+            if (!PlanetMapObj.CheckObstacle(nextLocation.X, nextLocation.Y))
             {
                 location = nextLocation;
                 Console.WriteLine("Road clean, no obstacle detected");
@@ -109,7 +97,7 @@ namespace RoverCommandService
         public void ShowMap()
         {
             Console.WriteLine("Generating Map...\n");
-            (int, int)[] grd = planetMap.MapGrid;
+            (int, int)[] grd = PlanetMapObj.MapGrid;
 
             int previousX = 0;
             foreach (var point in grd)

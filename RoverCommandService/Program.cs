@@ -36,7 +36,8 @@ namespace RoverCommandService
 
             app.MapGet("/commandrover", (HttpContext httpContext) =>
             {
-                Rover rover = new(0, 0, Directions.N);
+                PlanetMap planetMap = new(10, 10);
+                Rover rover = new(0, 0, Directions.N, planetMap);
                 rover.ShowMap();
                 rover.ReceiveCommands(commands);
             })
