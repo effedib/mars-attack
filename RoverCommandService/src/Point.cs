@@ -1,4 +1,4 @@
-﻿namespace RoverCommandService
+﻿namespace RoverCommandService.src
 {
     public class Point(int x, int y, Directions direction)
     {

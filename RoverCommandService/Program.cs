@@ -1,5 +1,7 @@
 
 
+using RoverCommandService.src;
+
 namespace RoverCommandService
 {
     public class Program

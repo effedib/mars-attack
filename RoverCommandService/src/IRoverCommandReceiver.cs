@@ -1,4 +1,4 @@
-﻿namespace RoverCommandService
+﻿namespace RoverCommandService.src
 {
     public interface IRoverCommandReceiver
     {

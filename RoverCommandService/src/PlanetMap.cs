@@ -1,6 +1,6 @@
-namespace RoverCommandService
+namespace RoverCommandService.src
 {
-    public class PlanetMap(int width, int height)
+    public class PlanetMap(int width, int height) : IPlanetMap
     {
         public int Width => width;
         public int Height => height;

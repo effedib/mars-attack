@@ -1,13 +1,5 @@
-namespace RoverCommandService
+namespace RoverCommandService.src
 {
-
-    public enum Directions
-    {
-        N,
-        E,
-        S,
-        W
-    }
     public class Rover(int x, int y, Directions direction, PlanetMap planetMap) : IRoverCommandReceiver
     {
 
@@ -19,19 +11,19 @@ namespace RoverCommandService
 
         public void ReceiveCommands(char[] commands)
         {
-            string commandsString = new string(commands.ToArray());
+            string commandsString = new(commands.ToArray());
             Console.WriteLine($"Commands received: {commandsString}\n");
 
-            bool checkObastacle = false;
+            bool checkObstacle = false;
             foreach (char command in commands)
             {
                 switch (command)
                 {
                     case 'f':
-                        checkObastacle = MoveRover();
+                        checkObstacle = MoveRover();
                         break;
                     case 'b':
-                        checkObastacle = MoveRover(-1);
+                        checkObstacle = MoveRover(-1);
                         break;
                     case 'r':
                         TurnRover();
@@ -42,11 +34,11 @@ namespace RoverCommandService
                     default:
                         break;
                 }
-                if (checkObastacle) break;
+                if (checkObstacle) break;
             }
         }
 
-     
+
         private bool MoveRover(int directionMovement = 1)
         {
             Point nextLocation = new(location.X, location.Y, location.Direction);
@@ -85,7 +77,7 @@ namespace RoverCommandService
 
         private void TurnRover(int directionTournement = 1)
         {
-            int addDirectionsCount = (directionTournement < 0) ? directionsCount : 0;
+            int addDirectionsCount = directionTournement < 0 ? directionsCount : 0;
 
             int newIndexDirection = (int)location.Direction + directionTournement + addDirectionsCount;
 
