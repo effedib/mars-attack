@@ -1,6 +1,6 @@
 namespace RoverCommandService.src
 {
-    public class Rover(int x, int y, Directions direction, PlanetMap planetMap) : IRoverCommandReceiver
+    public class Rover(int x, int y, Directions direction, PlanetMap planetMap) : IRover
     {
 
         private Point location = new(x, y, direction);

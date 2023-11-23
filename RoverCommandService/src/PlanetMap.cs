@@ -27,7 +27,6 @@ namespace RoverCommandService.src
 
         public bool CheckObstacle(int x, int y)
         {
-            Console.WriteLine($"Check obstacle for {x},{y}");
             return random.Next(0, 4) == 0;
         }
     }

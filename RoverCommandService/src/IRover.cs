@@ -1,6 +1,6 @@
 ﻿namespace RoverCommandService.src
 {
-    public interface IRoverCommandReceiver
+    public interface IRover
     {
         void ReceiveCommands(char[] commands);
     }
