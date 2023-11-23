@@ -10,10 +10,11 @@ namespace RoverCommandService.Tests
         public void ReceiveCommands_SingleCommand_MoveRoverCalled()
         {
             var planetMap = new PlanetMap(10, 15);
-            var rover = new Rover(0, 0, Directions.S, planetMap);
+            var rover = new Rover(0, 0, Directions.N, planetMap);
             var commands = new char[] { 'f' };
-            var expectedOutput = "Road clean, no obstacle detected";
-            var alternativeOutput = "Obstacle detected, STOP!";
+            string commandsString = new(commands.ToArray());
+            var expectedOutput = $"Commands received: {commandsString}\n\r\nRoad clean, no obstacle detected\r\nnew Point = 0,1";
+            var alternativeOutput = $"Commands received: {commandsString}\n\r\nObstacle detected, STOP!";
 
             using (var sw = new StringWriter())
             {
