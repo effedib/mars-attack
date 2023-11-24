@@ -70,12 +70,12 @@ namespace RoverCommandService.src
             {
                 Location = nextLocation;
                 Console.WriteLine("Road clean, no obstacle detected");
-                Console.WriteLine($"new Point = {Location.X},{Location.Y}");
+                Console.WriteLine($"new Point = {Location.X},{Location.Y}\n");
                 return false;
             }
             else
             {
-                Console.WriteLine("Obstacle detected, STOP!");
+                Console.WriteLine("Obstacle detected, STOP!\n");
                 return true;
             }
         }
@@ -112,7 +112,7 @@ namespace RoverCommandService.src
 
             Location.Direction = (Directions)(newIndexDirection % directionsCount);
 
-            Console.WriteLine($"new direction = {Location.Direction}");
+            Console.WriteLine($"new direction = {Location.Direction}\n");
         }
 
     }
