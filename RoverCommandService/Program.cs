@@ -42,7 +42,7 @@ namespace RoverCommandService
                 // use test commands
                 rover.ReceiveCommands(commands);
 
-                return "Comandi ricevuti e eseguiti con successo!";
+                return "Commands received and successfully executed!";
             })
             .WithName("SendCommandsRover")
             .WithOpenApi();
