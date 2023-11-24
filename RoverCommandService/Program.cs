@@ -39,10 +39,19 @@ namespace RoverCommandService
                 Rover rover = new(0, 0, Directions.N, planetMap);
                 rover.ShowMap();
 
-                // use test commands
                 rover.ReceiveCommands(commands);
 
-                return "Commands received and successfully executed!";
+                string obstacle = "";
+                if (rover.FoundObstacle)
+                {
+                    obstacle = "Obstacle detected!";
+                }
+                else
+                {
+                    obstacle = "No obstacle detected!";
+                }
+                string result = obstacle + $"\nCurrent position: ({rover.Location.X}, {rover.Location.Y})\nCurrent direction: {rover.Location.Direction}";
+                return result;
             })
             .WithName("SendCommandsRover")
             .WithOpenApi();

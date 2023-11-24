@@ -22,7 +22,7 @@ namespace RoverCommandService.Tests
                 rover.ReceiveCommands(commands);
                 var output = sw.ToString().Trim();
 
-                Assert.True(expectedOutput == output || alternativeOutput == output);   
+                Assert.True(expectedOutput == output || alternativeOutput == output);
             }
         }
 
