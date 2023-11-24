@@ -1,5 +1,7 @@
 
 
+using RoverCommandService.src;
+
 namespace RoverCommandService
 {
     public class Program
@@ -28,21 +30,23 @@ namespace RoverCommandService
 
             app.UseAuthorization();
 
-            var commands = new[]
+            app.MapPost("/commandrover", async (HttpContext httpContext) =>
             {
-                //'f','f','f','l','b','l','f','f','r','f'
-                'b','b','b','f','f','f','f','l','b','f','l','l','f','f','b'
-            };
+                string commandString = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
+                char[] commands = commandString.ToCharArray();
 
-            app.MapGet("/commandrover", (HttpContext httpContext) =>
-            {
                 PlanetMap planetMap = new(10, 10);
                 Rover rover = new(0, 0, Directions.N, planetMap);
                 rover.ShowMap();
+
+                // use test commands
                 rover.ReceiveCommands(commands);
+
+                return "Comandi ricevuti e eseguiti con successo!";
             })
             .WithName("SendCommandsRover")
             .WithOpenApi();
+
 
             app.Run();
         }

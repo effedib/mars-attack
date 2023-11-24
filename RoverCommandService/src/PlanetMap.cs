@@ -1,6 +1,6 @@
-namespace RoverCommandService
+namespace RoverCommandService.src
 {
-    public class PlanetMap(int width, int height)
+    public class PlanetMap(int width, int height) : IPlanetMap
     {
         public int Width => width;
         public int Height => height;
@@ -27,7 +27,6 @@ namespace RoverCommandService
 
         public bool CheckObstacle(int x, int y)
         {
-            Console.WriteLine($"Check obstacle for {x},{y}");
             return random.Next(0, 4) == 0;
         }
     }
