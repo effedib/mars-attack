@@ -13,8 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: RoverCommandService
    
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup dotnet-rover
@@ -23,7 +25,10 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Restore dependencies
       run: dotnet restore
+      # working-directory: ./RoverCommandService
     - name: Build
       run: dotnet build --no-restore
+      # working-directory: ./RoverCommandService
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      # working-directory: ./RoverCommandService.Tests
