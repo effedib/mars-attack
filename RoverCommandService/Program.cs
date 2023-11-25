@@ -1,10 +1,9 @@
 
-
 using RoverCommandService.src;
 
 namespace RoverCommandService
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -55,7 +54,6 @@ namespace RoverCommandService
             })
             .WithName("SendCommandsRover")
             .WithOpenApi();
-
 
             app.Run();
         }
