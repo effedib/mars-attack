@@ -35,5 +35,6 @@ jobs:
       working-directory: RoverCommandService.Tests
 
     - name: Coverage
-      uses: codecov/codecov-action@v3.1.4
-      
+      uses: codecov/codecov-action@v3
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
