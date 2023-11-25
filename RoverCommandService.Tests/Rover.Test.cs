@@ -6,7 +6,6 @@ namespace RoverCommandService.Tests
 {
     public class RoverTests
     {
-
         [Theory]
         [InlineData('f', Directions.N, 0, 0, 0, 1, Directions.N)]
         [InlineData('b', Directions.N, 5, 5, 5, 4, Directions.N)]
