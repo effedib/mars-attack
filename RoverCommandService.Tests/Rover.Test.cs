@@ -7,16 +7,15 @@ namespace RoverCommandService.Tests
     public class RoverTests
     {
         [Theory]
-        [InlineData('f', Directions.N, 0, 0, 0, 1, Directions.N)]
-        [InlineData('b', Directions.N, 5, 5, 5, 4, Directions.N)]
-        [InlineData('r', Directions.N, 0, 0, 0, 0, Directions.E)]
-        [InlineData('l', Directions.N, 0, 0, 0, 0, Directions.W)]
-        public void ReceiveCommands_UpdateDirectionLocationCorrectly(
-            char command, Directions initialDirection, int initialX, int initialY,
-            int expectedX, int expectedY, Directions expectedDirection)
+        [InlineData('f', 0, 1, Directions.N)]
+        [InlineData('b', 0, 9, Directions.N)]
+        [InlineData('r', 0, 0, Directions.E)]
+        [InlineData('l', 0, 0, Directions.W)]
+        public void ReceiveCommands_UpdateDirectionLocationCorrectly(char command, int expectedX, int expectedY,
+                                                                     Directions expectedDirection)
         {
-            var planetMap = new PlanetMap(10, 10);
-            var rover = new Rover(initialX, initialY, initialDirection, planetMap);
+            var rover = Rover.Instance;
+            rover.Reset();
 
             rover.ReceiveCommands([command]);
 
@@ -24,9 +23,9 @@ namespace RoverCommandService.Tests
 
             if (obstacleDetected)
             {
-                Assert.Equal(initialX, rover.Location.X);
-                Assert.Equal(initialY, rover.Location.Y);
-                Assert.Equal(initialDirection, rover.Location.Direction);
+                Assert.Equal(0, rover.Location.X);
+                Assert.Equal(0, rover.Location.Y);
+                Assert.Equal(Directions.N, rover.Location.Direction);
             }
             else
             {

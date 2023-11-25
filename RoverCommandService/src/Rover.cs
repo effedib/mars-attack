@@ -1,15 +1,39 @@
 namespace RoverCommandService.src
 {
-    public class Rover(int x, int y, Directions direction, PlanetMap planetMap) : IRover
+    public sealed class Rover : IRover
     {
+        private static Rover instance = null!;
 
-        public Point Location { get; private set; } = new(x, y, direction);
+        public static Rover Instance
+        {
+            get
+            {
+                // if instance == null
+                return instance ??= new Rover(0, 0, Directions.N, new PlanetMap(10, 10));
+            }
+        }
 
+        private int X { get; }
+        private int Y { get; }
+        private Directions Dir { get; }
+        public Point Location { get; private set; }
+        public PlanetMap PlanetMapObj { get; }
         private readonly int directionsCount = Enum.GetValues(typeof(Directions)).Length;
-
-        public PlanetMap PlanetMapObj => planetMap;
-
         public bool FoundObstacle { get; private set; }
+
+        private Rover(int x, int y, Directions direction, PlanetMap planetMap)
+        {
+            X = x; Y = y; Dir = direction;
+            Location = new(X, Y, Dir);
+            PlanetMapObj = planetMap;
+        }
+
+        public void Reset()
+        {
+            Location.X = 0;
+            Location.Y = 0;
+            Location.Direction = Directions.N;
+        }
 
         public void ShowMap()
         {
@@ -60,7 +84,6 @@ namespace RoverCommandService.src
                 if (FoundObstacle) break;
             }
         }
-
 
         private bool MoveRover(int directionMovement)
         {
@@ -114,6 +137,5 @@ namespace RoverCommandService.src
 
             Console.WriteLine($"new direction = {Location.Direction}\n");
         }
-
     }
 }
