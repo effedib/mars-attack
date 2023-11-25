@@ -5,6 +5,5 @@
         public int X { get; set; } = x;
         public int Y { get; set; } = y;
         public Directions Direction { get; set; } = direction;
-
     }
 }

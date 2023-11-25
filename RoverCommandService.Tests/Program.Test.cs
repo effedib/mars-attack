@@ -12,7 +12,7 @@ namespace RoverCommandService.Tests
         {
             var client = _factory.CreateClient();
 
-            var commands = "bbbfffflbfllffb";
+            const string commands = "bbbfffflbfllffb";
 
             var content = new StringContent(commands, Encoding.UTF8, "text/plain");
 

@@ -3,7 +3,7 @@ using RoverCommandService.src;
 
 namespace RoverCommandService
 {
-    public static class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -29,13 +29,12 @@ namespace RoverCommandService
 
             app.UseAuthorization();
 
+            var rover = Rover.Instance;
             app.MapPost("/commandrover", async (HttpContext httpContext) =>
             {
                 string commandString = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
                 char[] commands = commandString.ToCharArray();
 
-                PlanetMap planetMap = new(10, 10);
-                Rover rover = new(0, 0, Directions.N, planetMap);
                 rover.ShowMap();
 
                 rover.ReceiveCommands(commands);
