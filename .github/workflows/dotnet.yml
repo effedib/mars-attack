@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../RoverCommandService
+        working-directory: RoverCommandService
    
     steps:
     - uses: actions/checkout@v4
