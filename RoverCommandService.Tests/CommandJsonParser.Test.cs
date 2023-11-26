@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 using RoverCommandService.src;
 
 namespace RoverCommandService.Tests
@@ -19,21 +15,13 @@ namespace RoverCommandService.Tests
             Assert.IsType<Dictionary<string, string>>(result);
         }
 
-        [Fact]
-        public void ParseJson_InvalidJson()
+        [Theory]
+        [InlineData("")]
+        [InlineData("invalidJson")]
+        [InlineData("{\"\":\"bbbbbb\"}")]
+        [InlineData("{\"commands\":\"\"}")]
+        public void ParseJson_InvalidJson(string jsonString)
         {
-            const string jsonString = "invalidJson";
-
-            var result = CommandJsonParser.ParseJson(jsonString);
-
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public void ParseJson_EmptyJsonString()
-        {
-            const string jsonString = "";
-
             var result = CommandJsonParser.ParseJson(jsonString);
 
             Assert.Null(result);

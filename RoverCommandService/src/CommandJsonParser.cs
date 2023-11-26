@@ -45,12 +45,12 @@ namespace RoverCommandService.src
         {
             ArgumentNullException.ThrowIfNull(parsedObject);
 
-            if (parsedObject.Keys == null || !parsedObject.ContainsKey(Commands))
+            if (!parsedObject.TryGetValue(Commands, out string? value))
             {
                 throw new ArgumentException("Commands key not found");
             }
 
-            if (!IsValidCommandString(parsedObject[Commands]))
+            if (!IsValidCommandString(value))
             {
                 throw new ArgumentException("The value associated with the key 'commands' is invalid.");
             }
