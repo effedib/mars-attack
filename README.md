@@ -57,7 +57,34 @@ dotnet run --launch-profile https
 dotnet test --no-build
 ```
 
-  
+
+## API Reference
+
+#### Send commands
+
+```http
+  POST /commandrover
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `unique Json-key` | `string` | **Required**: "commands" |
+
+
+## Usage/Examples
+
+```bash
+curl -X POST https://localhost:7015/commandrover
+      -H 'Content-Type:application/json'
+      -d "{'commands': 'fff'}"
+
+curl -X POST http://localhost:5197/commandrover
+      -H 'Content-Type:application/json'
+      -d "{'commands': 'fff'}"
+
+```
+
+
   
 <h2>💻 Built with</h2>
 
