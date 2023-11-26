@@ -3,21 +3,12 @@ namespace RoverCommandService.src
     public sealed class Rover : IRover
     {
         private static Rover instance = null!;
-
-        public static Rover Instance
-        {
-            get
-            {
-                // if instance == null
-                return instance ??= new Rover(0, 0, Directions.N, new PlanetMap(10, 10));
-            }
-        }
-
         private int X { get; }
         private int Y { get; }
         private Directions Dir { get; }
         public Point Location { get; private set; }
         public PlanetMap PlanetMapObj { get; }
+        
         private readonly int directionsCount = Enum.GetValues(typeof(Directions)).Length;
         public bool FoundObstacle { get; private set; }
 
@@ -26,6 +17,15 @@ namespace RoverCommandService.src
             X = x; Y = y; Dir = direction;
             Location = new(X, Y, Dir);
             PlanetMapObj = planetMap;
+        }
+
+        public static Rover Instance
+        {
+            get
+            {
+                // if instance == null
+                return instance ??= new Rover(0, 0, Directions.N, new PlanetMap(10, 10));
+            }
         }
 
         public void Reset()
