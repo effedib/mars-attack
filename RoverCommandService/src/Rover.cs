@@ -47,6 +47,11 @@ namespace RoverCommandService.src
         public bool FoundObstacle { get; private set; }
 
         /// <summary>
+        /// Indicates the point where the Rover encountered an obstacle during its movement.
+        /// </summary>
+        public Point Obstacle { get; private set; } = null!;
+
+        /// <summary>
         /// Private constructor for creating a Rover instance with specified initial parameters.
         /// </summary>
         private Rover(int x, int y, Directions direction, PlanetMap planetMap)
@@ -152,7 +157,8 @@ namespace RoverCommandService.src
             }
             else
             {
-                Console.WriteLine("Obstacle detected, STOP!\n");
+                Obstacle = new(nextLocation.X, nextLocation.Y, nextLocation.Direction);
+                Console.WriteLine($"Obstacle detected at position: ({Obstacle.X}, {Obstacle.Y})!\n");
                 return true;
             }
         }

@@ -41,7 +41,7 @@ namespace RoverCommandService.src
 
             if (RoverIstance.FoundObstacle)
             {
-                Obstacle = "Obstacle detected!";
+                Obstacle = $"Obstacle detected at position: ({RoverIstance.Obstacle.X}, {RoverIstance.Obstacle.Y})";
             }
             else
             {
