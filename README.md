@@ -1,11 +1,9 @@
+<p align="left"><img src="https://github.com/effedib/mars-attack/actions/workflows/dotnet.yml/badge.svg?branch=main" alt="shields"><img src="https://img.shields.io/codecov/c/github/effedib/mars-attack" alt="shields"></p>
 <h1 align="center" id="title">mars-attack</h1>
 
 <p align="center"><img src="https://socialify.git.ci/effedib/mars-attack/image?language=1&amp;name=1&amp;owner=1&amp;theme=Light" alt="project-image"></p>
 
 <p id="description">Project developed for the Mars exploration mission through the deployment of remotely controlled vehicles on the planet's surface. This API was created to translate commands sent from Earth into instructions comprehensible by the rover.</p>
-
-<p align="center"><img src="https://github.com/effedib/mars-attack/actions/workflows/dotnet.yml/badge.svg?branch=main" alt="shields"><img src="https://img.shields.io/codecov/c/github/effedib/mars-attack" alt="shields"></p>
-
   
   
 <h2>🧐 Features</h2>
