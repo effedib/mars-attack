@@ -1,6 +1,12 @@
-@RoverCommandService_HostAddress = http://localhost:5197
+@RoverCommandService_HostAddress = https://localhost:7015
 
-GET {{RoverCommandService_HostAddress}}/commandrover/
+POST {{RoverCommandService_HostAddress}}/commandrover/
+Content-Type: application/json
+Connection: keep-alive
 Accept: application/json
+
+{
+    "commands": "blffffff"
+}
 
 ###

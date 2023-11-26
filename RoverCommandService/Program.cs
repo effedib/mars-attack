@@ -1,4 +1,3 @@
-
 using RoverCommandService.src;
 
 namespace RoverCommandService
@@ -29,27 +28,11 @@ namespace RoverCommandService
 
             app.UseAuthorization();
 
-            var rover = Rover.Instance;
             app.MapPost("/commandrover", async (HttpContext httpContext) =>
             {
-                string commandString = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
-                char[] commands = commandString.ToCharArray();
+                string commandJson = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
 
-                rover.ShowMap();
-
-                rover.ReceiveCommands(commands);
-
-                string obstacle = "";
-                if (rover.FoundObstacle)
-                {
-                    obstacle = "Obstacle detected!";
-                }
-                else
-                {
-                    obstacle = "No obstacle detected!";
-                }
-                string result = obstacle + $"\nCurrent position: ({rover.Location.X}, {rover.Location.Y})\nCurrent direction: {rover.Location.Direction}";
-                return result;
+                return new MoveRover(commandJson.ToLower()).ExecuteCommands();
             })
             .WithName("SendCommandsRover")
             .WithOpenApi();
