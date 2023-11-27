@@ -20,7 +20,21 @@ namespace RoverCommandService
             {
                 string commandJson = await new StreamReader(httpContext.Request.Body).ReadToEndAsync();
 
-                return new MoveRover(commandJson.ToLower()).ExecuteCommands();
+                var result = new MoveRover(commandJson.ToLower()).ExecuteCommands();
+
+                if (result == "No commands received")
+                {
+                    httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await httpContext.Response.WriteAsync(result);
+                    return;
+                }
+                else
+                {
+                    httpContext.Response.StatusCode = StatusCodes.Status200OK;
+                    await httpContext.Response.WriteAsync(result);
+                    return;
+                }
+
             });
 
             app.Run();
