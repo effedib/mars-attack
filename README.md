@@ -5,7 +5,24 @@
 
 <p id="description">Project developed for the Mars exploration mission through the deployment of remotely controlled vehicles on the planet's surface. The API translates commands sent from Earth into instructions executable by the rover.</p>
   
-  
+
+<h2>👷 How It works</h2>
+
+The Rover accepts the commands as chars:
+
+*   'f':   forward
+*   'b':   backward
+*   'l':   turn left
+*   'r':   turn right
+
+You can concatenate the chars as you want in a string to pass to the key "commands" in the Json to put in the body request.
+Every other char will be ignored by the Rover, so if you send:
+
+*   "fff":   Rover goes forward for 3 points
+*   "aaa":   Rover ignore commands
+*   "123456":   Rover ignore commands
+*   "":   Rover ignore commands
+
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
