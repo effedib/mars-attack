@@ -3,7 +3,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/effedib/mars-attack/image?language=1&amp;name=1&amp;owner=1&amp;theme=Light" alt="project-image"></p>
 
-<p id="description">Project developed for the Mars exploration mission through the deployment of remotely controlled vehicles on the planet's surface. This API was created to translate commands sent from Earth into instructions comprehensible by the rover.</p>
+<p id="description">Project developed for the Mars exploration mission through the deployment of remotely controlled vehicles on the planet's surface. The API translates commands sent from Earth into instructions executable by the rover.</p>
   
   
 <h2>🧐 Features</h2>
@@ -58,18 +58,25 @@ dotnet test --no-build
 
 ## API Reference
 
-#### Send commands
+#### Send Commands
 
-```http
-  POST /commandrover
-```
+ <summary><code>POST</code> <code><b>/</b></code> <code>commandrover</code></summary>
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `unique Json-key` | `string` | **Required**: "commands" |
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | "commands" |  required | object (JSON )   | Unique key in Json data  |
 
 
-## Usage/Examples
+##### Response
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `text/plain;charset=UTF-8`        | `obstacle detection, current position, current location` |
+
+
+## cURL Examples
 
 ```bash
 curl -X POST https://localhost:7015/commandrover
@@ -82,6 +89,36 @@ curl -X POST http://localhost:5197/commandrover
 
 ```
 
+## Response Example
+
+```bash
+Obstacle detected at position: (0, 1)
+Current position: (0, 2)
+Current direction: N
+
+No obstacle detected!
+Current position: (0, 9)
+Current direction: N
+```
+
+## Bad cURL Examples
+
+```bash
+curl -X POST https://localhost:7015/commandrover
+      -H 'Content-Type:application/json'
+      -d "{'': 'fff'}"
+
+curl -X POST http://localhost:5197/commandrover
+      -H 'Content-Type:application/json'
+      -d "{'commands': ''}"
+
+```
+
+## Response Example
+
+```bash
+No commands received
+```
 
   
 <h2>💻 Built with</h2>
