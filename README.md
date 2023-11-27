@@ -91,6 +91,7 @@ dotnet test --no-build
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
 > | `200`         | `text/plain;charset=UTF-8`        | `obstacle detection, current position, current location` |
+> | `400`         | `text/plain;charset=UTF-8`        | `No commands received` |
 
 
 ## cURL Examples
