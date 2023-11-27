@@ -79,19 +79,19 @@ dotnet test --no-build
 
  <summary><code>POST</code> <code><b>/</b></code> <code>commandrover</code></summary>
 
-##### Parameters
+##### Body Request
 
-> | name      |  type     | data type               | description                                                           |
-> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
-> | "commands" |  required | object (JSON )   | Unique key in Json data  |
+> |  type     | data type               | key | value                                   |
+> |-----------|-------------------------|-----------------|-----------------------------------------------------|
+> |  required | object (JSON )   | commands | string |
 
 
 ##### Response
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `text/plain;charset=UTF-8`        | `obstacle detection, current position, current location` |
-> | `400`         | `text/plain;charset=UTF-8`        | `No commands received` |
+> | `200`         | text/plain;charset=UTF-8        | obstacle detection, current position, current location |
+> | `400`         | text/plain;charset=UTF-8        | No commands received |
 
 
 ## cURL Examples
