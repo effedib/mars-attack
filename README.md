@@ -142,7 +142,7 @@ No commands received
 - [ ] Add logger per request
 - [ ] Replace Console.Writeline with logger
 - [ ] Report every Rover movement in the response
-- [ ] Add 400 Bad Request
+- [X] Add 400 Bad Request
 - [ ] Add Authentication/Authorization
 
 
