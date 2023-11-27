@@ -137,7 +137,15 @@ curl -X POST http://localhost:5197/commandrover
 No commands received
 ```
 
-  
+<h2>📝 TODO</h2>
+
+- [ ] Add logger per request
+- [ ] Replace Console.Writeline with logger
+- [ ] Report every Rover movement in the response
+- [ ] Add 400 Bad Request
+- [ ] Add Authentication/Authorization
+
+
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
