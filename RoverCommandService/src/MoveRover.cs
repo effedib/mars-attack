@@ -39,14 +39,19 @@ namespace RoverCommandService.src
 
             RoverIstance.ReceiveCommands(Commands);
 
-            if (RoverIstance.FoundObstacle)
-            {
-                Obstacle = $"Obstacle detected at position: ({RoverIstance.Obstacle.X}, {RoverIstance.Obstacle.Y})";
-            }
-            else
-            {
-                Obstacle = "No obstacle detected!";
-            }
+            //if (RoverIstance.FoundObstacle)
+            //{
+            //    Obstacle = $"Obstacle detected at position: ({RoverIstance.Obstacle.X}, {RoverIstance.Obstacle.Y})";
+            //}
+            //else
+            //{
+            //    Obstacle = "No obstacle detected!";
+            //}
+
+            Obstacle = RoverIstance.FoundObstacle.Equals(true) ? 
+                        $"Obstacle detected at position: ({RoverIstance.Obstacle.X}, {RoverIstance.Obstacle.Y})" :
+                        "No obstacle detected!";
+
             return Obstacle + $"\nCurrent position: ({RoverIstance.Location.X}, {RoverIstance.Location.Y})\nCurrent direction: {RoverIstance.Location.Direction}";
         }
     }
