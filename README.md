@@ -69,6 +69,9 @@ dotnet run --launch-profile https
 <p>6. How Run Tests</p>
 
 ```
+cd C:\path\to\mars-attack-folder\mars-attack\RoverCommandService.Tests
+```
+```
 dotnet test --no-build
 ```
 
@@ -77,7 +80,7 @@ dotnet test --no-build
 
 #### Send Commands
 
- <summary><code>POST</code> <code><b>/</b></code> <code>commandrover</code></summary>
+ <summary><code>POST</code> <code>/commandrover</code></summary>
 
 ##### Body Request
 
